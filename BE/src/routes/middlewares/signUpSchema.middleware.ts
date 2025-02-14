@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { signupSchema } from "../userRoutes.ts/schema/schema";
 
-export function authMiddleware (req : Request, res : Response, next : NextFunction)
+export function signUpSchemamiddleware (req : Request, res : Response, next : NextFunction)
 {
     const username = req.body.username , 
     fName = req.body.fName , 
@@ -17,8 +17,11 @@ export function authMiddleware (req : Request, res : Response, next : NextFuncti
 
     if(!result.success)
     {
-        console.log(result.error);
+        res.status(400).send({
+            msg : "Wrong Input"
+        });
         return;
     }
+    
     next();
 }
